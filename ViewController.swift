@@ -46,43 +46,43 @@ class ViewController: UIViewController,UITextFieldDelegate {
         let grossPay = CalcGrossPay()
         var federalTax:Double = Double(federalTaxRate.text!)!
         federalTax = (1-((Double(grossPay)-federalTax)/Double(grossPay)))
-        federalTaxPercentage.text = String(federalTax)
+        federalTaxPercentage.text = String(format: "%.4f",federalTax)
     }
     @IBAction func CalculateStateTax(_ sender: Any) {
         let grossPay = CalcGrossPay()
         var stateTax:Double = Double(stateTaxRate.text!)!
         stateTax = (1-((Double(grossPay)-stateTax)/Double(grossPay)))
-        stateTaxPercentage.text = String(stateTax)
+        stateTaxPercentage.text = String(format: "%.4f",stateTax)
     }
    
     @IBAction func CalculateSSTax(_ sender: Any) {
         let grossPay = CalcGrossPay()
         var ssTax:Double = Double(ssnTaxRate.text!)!
         ssTax = (1-((Double(grossPay)-ssTax)/Double(grossPay)))
-        ssnTaxPercentage.text = String(ssTax)
+        ssnTaxPercentage.text = String(format: "%.4f",ssTax)
     }
     
     @IBAction func CalculateMedicareTax(_ sender: Any) {
         let grossPay = CalcGrossPay()
         var medicareTax:Double = Double(medicareTaxRate.text!)!
         medicareTax = (1-((Double(grossPay)-medicareTax)/Double(grossPay)))
-        medicareTaxPercentage.text = String(medicareTax)
+        medicareTaxPercentage.text = String(format: "%.4f",medicareTax)
     }
-    func CalcGrossPay()->Int{
-        let wageIn:Int = Int(hourWage.text!)!
-        let hoursWorkedIn:Int = Int(hoursWorked.text!)!
+    func CalcGrossPay()->Double{
+        let wageIn:Double = Double(hourWage.text!)!
+        let hoursWorkedIn:Double = Double(hoursWorked.text!)!
         let grossPayOut = hoursWorkedIn*wageIn
         
         
-        grossPay.text = "Gross Pay: $" + String(grossPayOut)
+        grossPay.text = "Gross Pay: $" + String(format: "%.2f",grossPayOut)
         return grossPayOut;
     }
-    func CalcNetPay(grossPay:Int){
+    func CalcNetPay(grossPay:Double){
         let fedTax:Double = Double(federalTaxRate.text!)!
         let stTax:Double=Double(stateTaxRate.text!)!
         let ssTax:Double = Double(ssnTaxPercentage.text!)!
         let medicareTax:Double = Double(medicareTaxRate.text!)!
-        netPay.text = "Net Pay: $"+String(Double(grossPay)-fedTax-stTax-ssTax-medicareTax)
+        netPay.text = "Net Pay: $"+String(format: "%.2f",Double(grossPay)-fedTax-stTax-ssTax-medicareTax)
     }
 }
 
